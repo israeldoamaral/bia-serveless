@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Instalando dependências para migrate...
+      - curl -fsSL https://rpm.nodesource.com/setup_21.x | sudo bash -
+      - sudo yum install -y nodejs
+  
+  build:
+    commands:
+      - echo Instalando as dependencias para migrate...
+      - npm install --loglevel=error
+      - echo executando os comandos da migrate...
+      - npx sequelize db:create || echo "Banco já existe, continue..."
+      - npx sequelize db:migrate
