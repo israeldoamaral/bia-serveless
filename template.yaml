@@ -9,6 +9,11 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+      AllowOrigin: "'http://localhost:3001'"
 
 Resources:
   HelloWorldFunction:
@@ -39,6 +44,31 @@ Resources:
           Type: Api
           Properties:
             Path: /api/tarefas
+            Method: get
+        PostTarefas:
+          Type: Api
+          Properties:
+            Path: /api/tarefas
+            Method: post
+        GetTarefa:
+          Type: Api
+          Properties:
+            Path: /api/tarefas/{uuid}
+            Method: get
+        UpdatePriority:
+          Type: Api
+          Properties:
+            Path: /api/tarefas/update_priority/{uuid}
+            Method: put
+        DeleteTarefa:
+          Type: Api
+          Properties:
+            Path: /api/tarefas/{uuid}
+            Method: delete    
+        Getversao:
+          Type: Api
+          Properties:
+            Path: /api/versao
             Method: get
       Environment:
         Variables:
