@@ -16,20 +16,6 @@ Globals:
       AllowOrigin: "'http://localhost:3001'"
 
 Resources:
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: hello-world/
-      Handler: app.lambdaHandler
-      Runtime: nodejs20.x
-      Architectures:
-        - x86_64
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
 
   TarefasFunction:
     Type: AWS::Serverless::Function
@@ -40,6 +26,11 @@ Resources:
       Architectures:
         - x86_64
       Events:
+        Ping:
+          Type: Api
+          Properties:
+            Path: /api/ping
+            Method: get        
         GetTarefas:
           Type: Api
           Properties:
@@ -72,15 +63,23 @@ Resources:
             Method: get
       Environment:
         Variables:
-          DB_HOST: "database"
+          DB_HOST: bia.cgbk82so41lk.us-east-1.rds.amazonaws.com
           DB_PORT: 5432
+          DB_USER: postgres
+          DB_PWD: URBCLSRtTesrs5lrB3Tr
+      VpcConfig: 
+        SecurityGroupIds:
+          - sg-04454b466db48c6c3
+        SubnetIds:
+          - subnet-0b1c98caf28dafe11
+          - subnet-0add0efa710bcbf7e
 Outputs:
-  HelloWorldApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/Prod/hello/"
-  HelloWorldFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
+  TarefasApi:
+    Description: "API Gateway endpoint URL for Prod stage for Tarefas function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/Prod/api/tarefas"
+  TarefasFunction:
+    Description: "Tarefas Lambda Function ARN"
+    Value: !GetAtt TarefasFunction.Arn
+  TarefasFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+    Value: !GetAtt TarefasFunctionRole.Arn
