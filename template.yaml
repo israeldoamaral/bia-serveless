@@ -13,7 +13,7 @@ Globals:
     Cors:
       AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
       AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-      AllowOrigin: "'http://localhost:3001'"
+      AllowOrigin: "'*'"
 
 Resources:
 
@@ -66,7 +66,7 @@ Resources:
           DB_HOST: bia.cgbk82so41lk.us-east-1.rds.amazonaws.com
           DB_PORT: 5432
           DB_USER: postgres
-          DB_PWD: URBCLSRtTesrs5lrB3Tr
+          DB_PWD: FIYhQvgevirUGZHAY21B
       VpcConfig: 
         SecurityGroupIds:
           - sg-04454b466db48c6c3
